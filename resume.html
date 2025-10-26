@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Resume - Simon's Portfolio</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+
+    <body>
+        <!-- Barre de progression scroll -->
+        <div class="scroll-progress"></div>
+
+        <!-- Particules animées en arrière-plan -->
+        <div id="particles-js"></div>
+
+        <!-- Cursor personnalisé -->
+        <div class="cursor"></div>
+        <div class="cursor-follower"></div>
+
+        <header>
+            <nav>
+                <ul>
+                    <li id="logo"><a href="index.html">Simon's Portfolio</a></li>
+                    <li><a href="resume.html">My resume</a></li>
+                    <li><a href="achievements.html">Achievements</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="resumePage">
+            <div class="resume-header">
+                <h1>My Resume</h1>
+                <p>Download or view my professional resume in different formats</p>
+            </div>
+
+            <div id="resumes">
+                <div class="resumeCom">
+                    <h4>My Classic Resume</h4>
+                    <a href="CV & photos/cvcom.jpg" target="_blank">
+                        <img src="CV & photos/cvcom.jpg" alt="Classic resume">
+                    </a>
+                    <a href="CV & photos/cvcom.pdf" download class="download-btn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                </div>
+                <div class="resumeAts">
+                    <h4>My ATS Resume</h4>
+                    <a href="CV & photos/cvats.jpg" target="_blank">
+                        <img src="CV & photos/cvats.jpg" alt="ATS resume">
+                    </a>
+                    <a href="CV & photos/cvats.pdf" download class="download-btn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <video autoplay muted loop playsinline id="footerVideo">
+                <source src="CV & photos/background-video.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+            <div id="sendAmessage">Send a message to Simon.</div>
+            <form>
+                <input placeholder="Your name">
+                <input placeholder="Your e-mail address">
+                <textarea placeholder="What's your message ?"></textarea>
+                <button>Send</button>
+            </form>
+            <div id="secondLine"></div>
+            <div id="socialIcons">
+                <a href="https://www.linkedin.com/in/simon-roger-08990a196" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/simonrogerr818-lab" target="_blank" rel="noopener noreferrer" class="social-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <div id="copyrightEtIcons">
+                <div id="copyright">
+                    <span>©Simon ROGER(); 2025</span>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts pour les effets -->
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+        
+        <script>
+            // Configuration des particules
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: '#8B5CF6' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#C084FC',
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: { enable: true, speed: 2 }
+                }
+            });
+
+            // Cursor personnalisé
+            const cursor = document.querySelector('.cursor');
+            const follower = document.querySelector('.cursor-follower');
+
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    follower.style.left = e.clientX + 'px';
+                    follower.style.top = e.clientY + 'px';
+                }, 100);
+            });
+
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(2)';
+                    follower.style.transform = 'scale(1.5)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    follower.style.transform = 'scale(1)';
+                });
+            });
+
+            // Scroll Reveal animations
+            ScrollReveal({
+                distance: '60px',
+                duration: 2000,
+                delay: 200,
+                reset: false
+            });
+
+            ScrollReveal().reveal('.resume-header h1', { delay: 300, origin: 'top' });
+            ScrollReveal().reveal('.resume-header p', { delay: 500, origin: 'top' });
+            ScrollReveal().reveal('.resumeCom', { delay: 400, origin: 'left' });
+            ScrollReveal().reveal('.resumeAts', { delay: 600, origin: 'right' });
+
+            // Tilt 3D sur les cartes
+            VanillaTilt.init(document.querySelectorAll(".resumeCom, .resumeAts"), {
+                max: 15,
+                speed: 400,
+                glare: true,
+                "max-glare": 0.3,
+            });
+
+            // Progress bar au scroll
+            window.addEventListener('scroll', () => {
+                const winScroll = document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.querySelector('.scroll-progress').style.width = scrolled + '%';
+            });
+        </script>
+    </body>
+</html>
